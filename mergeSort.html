@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	</title>
+</head>
+<body>
+	<script>
+		function mergesort(array){
+			var a = 0;
+			var b = array.length-1
+			return mergeSort(array, a, b)
+		}
+		function mergeSort(array, a, b) {
+			if (a===b) {
+				return [array[a]];
+			}
+			else {
+				var mid = Math.floor((a+b)/2)
+				var left = mergeSort(array, a, mid);
+				var right = mergeSort(array, mid+1, b);
+				return combine(left,right);
+			}
+		}
+
+
+		function combine(arr1, arr2){
+			var leftp = 0;
+			var rightp = 0;
+			var newArray = [];
+			while (leftp < arr1.length && rightp < arr2.length){
+				newElement = arr1[leftp]<arr2[rightp]? arr1[leftp++]:arr2[rightp++];
+				newArray.push(newElement);
+			}
+			if (leftp == arr1.length){
+				Array.prototype.push.apply(newArray,arr2.slice(rightp));
+			}
+			else {
+				Array.prototype.push.apply(newArray,arr1.slice(leftp));
+			}
+			return newArray;
+		}
+		var arr = [0,2,4,1,3,6,9,5,0,1,2,3,4];
+		var ans = mergesort(arr)
+		console.log(ans)
+	</script>
+</body>
+</html>
